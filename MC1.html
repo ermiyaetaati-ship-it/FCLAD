@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MC FCLAD | Shop</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    color:white;
+    background:
+        radial-gradient(
+            circle at top,
+            #003c35 0%,
+            #001817 35%,
+            #000 80%
+        );
+    min-height:100vh;
+}
+
+/* HEADER */
+
+header{
+    position:relative;
+    overflow:hidden;
+    text-align:center;
+    padding:35px 15px;
+    background:
+        linear-gradient(
+            135deg,
+            #00ff66,
+            #00ffff
+        );
+    color:#00100d;
+    box-shadow:
+        0 0 30px #00ff66,
+        inset 0 -5px 20px rgba(0,0,0,.2);
+}
+
+header h1{
+    position:relative;
+    margin:0;
+    font-size:42px;
+    font-weight:bold;
+}
+
+header p{
+    position:relative;
+    margin:12px 0 0;
+    font-size:19px;
+    font-weight:bold;
+}
+
+/* MENU */
+
+.menu{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+    padding:20px;
+    background:rgba(0,0,0,.85);
+    border-bottom:1px solid #00ff66;
+}
+
+.menu button{
+    border:none;
+    border-radius:14px;
+    padding:13px 24px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.support{
+    background:#008cff;
+    color:white;
+}
+
+.cart{
+    position:relative;
+    background:
+        linear-gradient(
+            90deg,
+            #00ff66,
+            #00ffff
+        );
+    color:black;
+}
+
+.clear{
+    background:
+        linear-gradient(
+            90deg,
+            #ff1744,
+            #ff5252
+        );
+    color:white;
+}
+
+.menu button:hover{
+    transform:translateY(-4px) scale(1.04);
+    box-shadow:0 0 22px currentColor;
+}
+
+#cartCount{
+    position:absolute;
+    top:-10px;
+    right:-10px;
+    min-width:28px;
+    height:28px;
+    padding:3px 7px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:#ff1744;
+    color:white;
+    border:2px solid white;
+    font-size:14px;
+    font-weight:bold;
+}
+
+/* TOTAL */
+
+.total-box{
+    width:92%;
+    max-width:750px;
+    margin:30px auto;
+    padding:25px;
+    text-align:center;
+    background:rgba(10,10,10,.8);
+    border:2px solid #00ff66;
+    border-radius:25px;
+    box-shadow:
+        0 0 25px rgba(0,255,102,.25),
+        inset 0 0 30px rgba(0,255,102,.04);
+}
+
+.total-box h2{
+    margin:0 0 12px;
+    color:#00ff66;
+}
+
+#total{
+    font-size:38px;
+    font-weight:bold;
+    text-shadow:0 0 15px #00ff66;
+}
+
+/* PRODUCTS */
+
+.products{
+    width:94%;
+    max-width:1450px;
+    margin:35px auto 70px;
+    display:grid;
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(250px,1fr)
+        );
+    gap:28px;
+}
+
+.card{
+    position:relative;
+    overflow:hidden;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.02)
+        );
+    border:1px solid rgba(0,255,102,.45);
+    border-radius:24px;
+    padding:15px;
+    text-align:center;
+    backdrop-filter:blur(10px);
+    box-shadow:0 10px 30px rgba(0,0,0,.5);
+    transition:.35s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    border-color:#00ffff;
+    box-shadow:
+        0 0 15px #00ff66,
+        0 15px 45px rgba(0,0,0,.7);
+}
+
+.card img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+    border-radius:18px;
+    transition:.4s;
+    display:block;
+}
+
+.card:hover img{
+    transform:scale(1.04);
+    filter:brightness(1.1);
+}
+
+.name{
+    margin-top:18px;
+    color:#00ff66;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.price{
+    margin:12px;
+    color:#ff4055;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.buy{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    background:
+        linear-gradient(
+            90deg,
+            #00ff66,
+            #00ffff
+        );
+    color:#00100d;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.buy:hover{
+    transform:scale(1.03);
+    box-shadow:0 0 25px #00ffff;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:30px;
+    background:#000;
+    border-top:1px solid #00ff66;
+    color:#777;
+}
+
+footer b{
+    color:#00ff66;
+}
+
+
+/* =====================================
+   دکمه چت
+===================================== */
+
+#mcSupportButton{
+
+    position:fixed;
+
+    left:22px;
+    bottom:22px;
+
+    width:65px;
+    height:65px;
+
+    border-radius:50%;
+
+    border:3px solid #00ffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00ff66,
+            #00ffff
+        );
+
+    color:#001010;
+
+    font-size:30px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    z-index:99999;
+
+    box-shadow:
+        0 0 15px #00ff66,
+        0 0 35px rgba(0,255,255,.5);
+
+    animation:mcPulse 2s infinite;
+}
+
+@keyframes mcPulse{
+
+    0%,100%{
+        box-shadow:
+            0 0 15px #00ff66,
+            0 0 35px #00ffff;
+    }
+
+    50%{
+        box-shadow:
+            0 0 30px #00ff66,
+            0 0 65px #00ffff;
+    }
+
+}
+
+
+/* =====================================
+   پنجره چت
+===================================== */
+
+#mcSupportChat{
+
+    position:fixed;
+
+    left:22px;
+    bottom:100px;
+
+    width:370px;
+    height:520px;
+
+    max-width:calc(100vw - 30px);
+
+    background:#071010;
+
+    border:2px solid #00ff66;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    z-index:99998;
+
+    display:none;
+
+    flex-direction:column;
+
+    box-shadow:
+        0 0 35px rgba(0,255,102,.4),
+        0 20px 70px rgba(0,0,0,.8);
+}
+
+
+/* HEADER CHAT */
+
+.mc-chat-header{
+
+    min-height:70px;
+
+    padding:12px 15px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00ff66,
+            #00ffff
+        );
+
+    color:#001010;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+}
+
+.mc-chat-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.mc-chat-avatar{
+
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    background:#001010;
+
+    color:#00ff66;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:22px;
+}
+
+.mc-chat-header small{
+    display:block;
+    margin-top:4px;
+}
+
+.mc-chat-close{
+
+    border:0;
+
+    background:rgba(0,0,0,.2);
+
+    color:#001010;
+
+    width:35px;
+    height:35px;
+
+    border-radius:50%;
+
+    font-size:20px;
+
+    cursor:pointer;
+}
+
+
+/* MESSAGES */
+
+#mcMessages{
+
+    flex:1;
+
+    overflow-y:auto;
+
+    padding:15px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+}
+
+.mc-message{
+
+    max-width:85%;
+
+    padding:11px 13px;
+
+    border-radius:15px;
+
+    font-size:13px;
+
+    line-height:1.8;
+}
+
+.mc-bot{
+
+    align-self:flex-start;
+
+    background:#142020;
+
+    border:1px solid #294040;
+
+    color:#eee;
+}
+
+.mc-user{
+
+    align-self:flex-end;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00ff66,
+            #00ffff
+        );
+
+    color:#001010;
+
+    font-weight:bold;
+}
+
+
+/* QUICK */
+
+.mc-quick{
+
+    display:flex;
+
+    gap:7px;
+
+    overflow-x:auto;
+
+    padding:10px;
+
+    border-top:1px solid #183030;
+}
+
+.mc-quick button{
+
+    white-space:nowrap;
+
+    padding:8px 11px;
+
+    border-radius:20px;
+
+    border:1px solid #00ff66;
+
+    background:#071010;
+
+    color:#00ff66;
+
+    cursor:pointer;
+
+    font-size:11px;
+}
+
+
+/* INPUT */
+
+.mc-chat-input{
+
+    display:flex;
+
+    gap:7px;
+
+    padding:10px;
+
+    border-top:1px solid #183030;
+}
+
+#mcInput{
+
+    flex:1;
+
+    min-width:0;
+
+    background:#020707;
+
+    color:white;
+
+    border:1px solid #294040;
+
+    border-radius:12px;
+
+    padding:12px;
+
+    outline:none;
+}
+
+#mcInput:focus{
+    border-color:#00ff66;
+}
+
+.mc-send{
+
+    border:0;
+
+    border-radius:12px;
+
+    padding:0 15px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00ff66,
+            #00ffff
+        );
+
+    color:#001010;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:28px;
+    }
+
+    .menu{
+        flex-direction:column;
+    }
+
+    .menu button{
+        width:100%;
+        max-width:400px;
+    }
+
+    .products{
+        grid-template-columns:1fr;
+    }
+
+    #mcSupportButton{
+
+        left:15px;
+        bottom:15px;
+
+        width:58px;
+        height:58px;
+    }
+
+    #mcSupportChat{
+
+        left:10px;
+        bottom:85px;
+
+        width:calc(100vw - 20px);
+
+        height:70vh;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+    <h1>
+        🔥 MC FCLAD SHOP 🔥
+    </h1>
+
+    <p>
+        به شاپ حرفه‌ای MC FCLAD خوش آمدید 🚀
+    </p>
+
+</header>
+
+
+<div class="menu">
+
+    <button
+        class="support"
+        onclick="window.location.href='pshtebaneFCLADMC.html'">
+
+        🎧 پشتیبانی
+
+    </button>
+
+
+    <button
+        class="cart"
+        onclick="window.location.href='sabadkhredFCLADMC.html'">
+
+        🛒 سبد خرید
+
+        <span id="cartCount">۰</span>
+
+    </button>
+
+
+    <button
+        class="support"
+        onclick="window.location.href='c:/Users/IT CITY/Desktop/FC/pashte chat.html'">
+
+        🎧 چت پشتیبانی
+
+    </button>
+
+
+    <button
+        class="clear"
+        onclick="clearCart()">
+
+        🗑️ خالی کردن سبد خرید
+
+    </button>
+
+</div>
+
+
+<div class="total-box">
+
+    <h2>
+        💰 مبلغ کل سبد خرید
+    </h2>
+
+    <div id="total">
+        ۰ تومان
+    </div>
+
+</div>
+
+
+<div class="products">
+
+
+<!-- VIP -->
+
+<div class="card">
+
+    <img src="d:\FCLADsaet\e1.jfif" alt="VIP">
+
+    <div class="name">
+        VIP
+    </div>
+
+    <div class="price">
+        ماهی 49,000 تومان
+    </div>
+
+    <button
+        class="buy"
+        onclick="addToCart('VIP',49000)">
+
+        🛒 افزودن به سبد خرید
+
+    </button>
+
+</div>
+
+
+<!-- MVP -->
+
+<div class="card">
+
+    <img
+        src="d:\FCLADsaet\5bfcfb3b-55be-43c3-a706-4334b7fb1218.jfif"
+        alt="MVP">
+
+    <div class="name">
+        MVP
+    </div>
+
+    <div class="price">
+        ماهی 99,000 تومان
+    </div>
+
+    <button
+        class="buy"
+        onclick="addToCart('MVP',99000)">
+
+        🛒 افزودن به سبد خرید
+
+    </button>
+
+</div>
+
+
+<!-- FOOTBALL PLAYER -->
+
+<div class="card">
+
+    <img src="d:\FCLADsaet\e3.png" alt="Football Player">
+
+    <div class="name">
+        FOOTBALL PLAYER
+    </div>
+
+    <div class="price">
+        ماهی 149,000 تومان
+    </div>
+
+    <button
+        class="buy"
+        onclick="addToCart('FOOTBALL PLAYER',149000)">
+
+        🛒 افزودن به سبد خرید
+
+    </button>
+
+</div>
+
+
+<!-- FOOTBALL PLAYER 2 -->
+
+<div class="card">
+
+    <img src="d:\FCLADsaet\e3.png" alt="Football Player 2">
+
+    <div class="name">
+        FOOTBALL PLAYER 2
+    </div>
+
+    <div class="price">
+        ماهی 199,000 تومان
+    </div>
+
+    <button
+        class="buy"
+        onclick="addToCart('FOOTBALL PLAYER 2',199000)">
+
+        🛒 افزودن به سبد خرید
+
+    </button>
+
+</div>
+
+
+<!-- GOD -->
+
+<div class="card">
+
+    <img src="d:\FCLADsaet\e55.png" alt="GOD">
+
+    <div class="name">
+        GOD
+    </div>
+
+    <div class="price">
+        ماهی 249,000 تومان
+    </div>
+
+    <button
+        class="buy"
+        onclick="addToCart('GOD',249000)">
+
+        🛒 افزودن به سبد خرید
+
+    </button>
+
+</div>
+
+
+<!-- ELITE -->
+
+<div class="card">
+
+    <img src="c:\Users\IT CITY\Pictures\66e.png" alt="ELITE">
+
+    <div class="name">
+        ELITE
+    </div>
+
+    <div class="price">
+        ماهی 299,000 تومان
+    </div>
+
+    <button
+        class="buy"
+        onclick="addToCart('ELITE',299000)">
+
+        🛒 افزودن به سبد خرید
+
+    </button>
+
+</div>
+
+
+<!-- SUPREME -->
+
+<div class="card">
+
+    <img
+        src="d:\FCLADsaet\66d8f41b-d189-46cc-b161-3c9bca7977ed.png"
+        alt="SUPREME">
+
+    <div class="name">
+        SUPREME
+    </div>
+
+    <div class="price">
+        ماهی 349,000 تومان
+    </div>
+
+    <button
+        class="buy"
+        onclick="addToCart('SUPREME',349000)">
+
+        🛒 افزودن به سبد خرید
+
+    </button>
+
+</div>
+
+
+<!-- PRO -->
+
+<div class="card">
+
+    <img
+        src="d:\FCLADsaet\eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.png"
+        alt="PRO">
+
+    <div class="name">
+        PRO
+    </div>
+
+    <div class="price">
+        ماهی 399,000 تومان
+    </div>
+
+    <button
+        class="buy"
+        onclick="addToCart('PRO',399000)">
+
+        🛒 افزودن به سبد خرید
+
+    </button>
+
+</div>
+
+</div>
+
+
+<footer>
+
+    ساخته شده برای
+
+    <b>MC FCLAD</b>
+
+    ❤️
+
+</footer>
+
+
+<!-- =====================================
+     دکمه 🎧
+===================================== -->
+
+<button
+    id="mcSupportButton"
+    onclick="mcToggleSupport()"
+    aria-label="پشتیبانی">
+
+    🎧
+
+</button>
+
+
+<!-- =====================================
+     CHAT
+===================================== -->
+
+<div id="mcSupportChat">
+
+
+    <div class="mc-chat-header">
+
+        <div class="mc-chat-title">
+
+            <div class="mc-chat-avatar">
+                🎧
+            </div>
+
+            <div>
+
+                <b>
+                    پشتیبانی MC FCLAD
+                </b>
+
+                <small>
+                    🟢 آنلاین
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="mc-chat-close"
+            onclick="mcToggleSupport()">
+
+            ✕
+
+        </button>
+
+    </div>
+
+
+    <div id="mcMessages">
+
+        <div class="mc-message mc-bot">
+
+            <b>🤖 پشتیبانی هوشمند MC FCLAD</b>
+
+            <br><br>
+
+            سلام 👋🔥
+
+            <br><br>
+
+            من ربات پشتیبانی شاپ هستم.
+
+            <br><br>
+
+            می‌تونی درباره قیمت رنک‌ها،
+            خرید یا سبد خرید سؤال کنی.
+
+        </div>
+
+    </div>
+
+
+    <div class="mc-quick">
+
+        <button onclick="mcQuick('قیمت رنک ها')">
+            💰 قیمت رنک‌ها
+        </button>
+
+        <button onclick="mcQuick('رنک VIP چنده؟')">
+            ⭐ VIP
+        </button>
+
+        <button onclick="mcQuick('رنک MVP چنده؟')">
+            ⭐ MVP
+        </button>
+
+        <button onclick="mcQuick('رنک GOD چنده؟')">
+            👑 GOD
+        </button>
+
+        <button onclick="mcQuick('سبد خرید')">
+            🛒 سبد خرید
+        </button>
+
+    </div>
+
+
+    <div class="mc-chat-input">
+
+        <input
+            id="mcInput"
+            type="text"
+            placeholder="پیامت رو بنویس..."
+            autocomplete="off"
+            onkeydown="mcEnter(event)">
+
+        <button
+            class="mc-send"
+            onclick="mcSend()">
+
+            ارسال
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================
+   سبد خرید
+===================================== */
+
+let cart =
+    JSON.parse(
+        localStorage.getItem("cart")
+    ) || [];
+
+
+function getTotal(){
+
+    let total = 0;
+
+    cart.forEach(function(item){
+
+        total +=
+            Number(item.price) *
+            Number(item.quantity);
+
+    });
+
+    return total;
+}
+
+
+function getCount(){
+
+    let count = 0;
+
+    cart.forEach(function(item){
+
+        count +=
+            Number(item.quantity);
+
+    });
+
+    return count;
+}
+
+
+function updateShop(){
+
+    const total =
+        getTotal();
+
+    const count =
+        getCount();
+
+
+    document
+        .getElementById("total")
+        .textContent =
+        total.toLocaleString("fa-IR")
+        + " تومان";
+
+
+    document
+        .getElementById("cartCount")
+        .textContent =
+        count.toLocaleString("fa-IR");
+
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+    localStorage.setItem(
+        "ermiya",
+        total
+    );
+
+    localStorage.setItem(
+        "cartCount",
+        count
+    );
+}
+
+
+function addToCart(name,price){
+
+    let product =
+        cart.find(function(item){
+
+            return item.name === name;
+
+        });
+
+
+    if(product){
+
+        product.quantity += 1;
+
+    }else{
+
+        cart.push({
+
+            name:name,
+
+            price:price,
+
+            quantity:1
+
+        });
+
+    }
+
+
+    updateShop();
+
+
+    alert(
+        "✅ " +
+        name +
+        " به سبد خرید اضافه شد!"
+    );
+}
+
+
+function clearCart(){
+
+    if(cart.length === 0){
+
+        alert(
+            "🛒 سبد خرید همین الان هم خالی است!"
+        );
+
+        return;
+    }
+
+
+    if(
+        confirm(
+            "⚠️ آیا مطمئنی می‌خواهی سبد خرید خالی شود؟"
+        )
+    ){
+
+        cart = [];
+
+        localStorage.removeItem("cart");
+        localStorage.removeItem("ermiya");
+        localStorage.removeItem("cartCount");
+
+        updateShop();
+
+        alert(
+            "✅ سبد خرید خالی شد!"
+        );
+    }
+}
+
+
+/* =====================================
+   چت
+===================================== */
+
+function mcToggleSupport(){
+
+    const chat =
+        document.getElementById(
+            "mcSupportChat"
+        );
+
+
+    if(chat.style.display === "flex"){
+
+        chat.style.display = "none";
+
+    }else{
+
+        chat.style.display = "flex";
+
+        setTimeout(function(){
+
+            document
+                .getElementById("mcInput")
+                .focus();
+
+        },100);
+    }
+}
+
+
+function mcAddMessage(text,type){
+
+    const box =
+        document.getElementById(
+            "mcMessages"
+        );
+
+
+    const message =
+        document.createElement("div");
+
+
+    message.className =
+        "mc-message " +
+        (
+            type === "user"
+            ? "mc-user"
+            : "mc-bot"
+        );
+
+
+    message.innerHTML = text;
+
+
+    box.appendChild(message);
+
+
+    box.scrollTop =
+        box.scrollHeight;
+}
+
+
+function mcSend(){
+
+    const input =
+        document.getElementById(
+            "mcInput"
+        );
+
+
+    const text =
+        input.value.trim();
+
+
+    if(!text) return;
+
+
+    mcAddMessage(
+        text,
+        "user"
+    );
+
+
+    input.value = "";
+
+
+    setTimeout(function(){
+
+        mcAddMessage(
+            mcAnswer(text),
+            "bot"
+        );
+
+    },600);
+}
+
+
+function mcQuick(text){
+
+    document
+        .getElementById("mcInput")
+        .value = text;
+
+    mcSend();
+}
+
+
+function mcEnter(event){
+
+    if(event.key === "Enter"){
+
+        event.preventDefault();
+
+        mcSend();
+    }
+}
+
+
+/* =====================================
+   ربات
+===================================== */
+
+const ranks = {
+
+    "vip":49000,
+
+    "mvp":99000,
+
+    "football player":149000,
+
+    "football player 2":199000,
+
+    "god":249000,
+
+    "elite":299000,
+
+    "supreme":349000,
+
+    "pro":399000
+
+};
+
+
+function normalize(text){
+
+    return text
+        .toLowerCase()
+        .replace(/ي/g,"ی")
+        .replace(/ك/g,"ک")
+        .trim();
+}
+
+
+function formatPrice(price){
+
+    return Number(price)
+        .toLocaleString("fa-IR")
+        + " تومان";
+}
+
+
+function mcAnswer(text){
+
+    const t =
+        normalize(text);
+
+
+    /* سلام */
+
+    if(
+        t.includes("سلام") ||
+        t.includes("درود")
+    ){
+
+        return `
+        سلام 👋🔥
+        <br><br>
+        به پشتیبانی هوشمند
+        <b>MC FCLAD</b>
+        خوش اومدی!
+        <br><br>
+        چه کمکی از دستم برمیاد؟
+        `;
+    }
+
+
+    /* قیمت رنک خاص */
+
+    for(const rank in ranks){
+
+        if(t.includes(rank)){
+
+            return `
+            🎮 رنک <b>${rank.toUpperCase()}</b>
+
+            <br><br>
+
+            💰 قیمت:
+            <b>${formatPrice(ranks[rank])}</b>
+
+            <br><br>
+
+            🛒 برای خرید،
+            روی «افزودن به سبد خرید» بزن.
+            `;
+        }
+    }
+
+
+    /* همه رنک‌ها */
+
+    if(
+        t.includes("قیمت") ||
+        t.includes("رنک") ||
+        t.includes("هزینه")
+    ){
+
+        return `
+        🎮 <b>رنک‌های MC FCLAD</b>
+
+        <br><br>
+
+        ⭐ VIP — ${formatPrice(49000)}
+        <br>
+        ⭐ MVP — ${formatPrice(99000)}
+        <br>
+        ⚽ FOOTBALL PLAYER — ${formatPrice(149000)}
+        <br>
+        ⚽ FOOTBALL PLAYER 2 — ${formatPrice(199000)}
+        <br>
+        👑 GOD — ${formatPrice(249000)}
+        <br>
+        💎 ELITE — ${formatPrice(299000)}
+        <br>
+        🔥 SUPREME — ${formatPrice(349000)}
+        <br>
+        🚀 PRO — ${formatPrice(399000)}
+        `;
+    }
+
+
+    /* خرید */
+
+    if(
+        t.includes("خرید") ||
+        t.includes("چطور بخر") ||
+        t.includes("چجوری بخر")
+    ){
+
+        return `
+        🛒 <b>روش خرید رنک</b>
+
+        <br><br>
+
+        1️⃣ رنک موردنظر را انتخاب کن.
+        <br>
+        2️⃣ روی افزودن به سبد خرید بزن.
+        <br>
+        3️⃣ وارد سبد خرید شو.
+        <br>
+        4️⃣ خریدت را تکمیل کن.
+
+        <br><br>
+
+        اگر مشکلی پیش آمد،
+        مشکل را برای من بنویس.
+        `;
+    }
+
+
+    /* سبد */
+
+    if(
+        t.includes("سبد") ||
+        t.includes("سبد خرید")
+    ){
+
+        const count =
+            getCount();
+
+        const total =
+            getTotal();
+
+
+        return `
+        🛒 <b>سبد خرید شما</b>
+
+        <br><br>
+
+        📦 تعداد:
+        <b>${count}</b>
+
+        <br>
+
+        💰 مبلغ:
+        <b>${formatPrice(total)}</b>
+
+        <br><br>
+
+        برای مشاهده سبد،
+        روی دکمه 🛒 سبد خرید بزن.
+        `;
+    }
+
+
+    /* پرداخت */
+
+    if(
+        t.includes("پرداخت") ||
+        t.includes("پول") ||
+        t.includes("واریز")
+    ){
+
+        return `
+        💳 اگر مبلغ از حسابت کم شده
+        ولی رنک دریافت نکردی،
+        لطفاً با پشتیبانی تماس بگیر.
+
+        <br><br>
+
+        📞 <b>09057866708</b>
+        `;
+    }
+
+
+    /* مشکل */
+
+    if(
+        t.includes("مشکل") ||
+        t.includes("خطا") ||
+        t.includes("کار نمیکنه") ||
+        t.includes("کار نمی‌کنه")
+    ){
+
+        return `
+        ⚠️ متأسفم که به مشکل خوردی.
+
+        <br><br>
+
+        اگر مشکل مربوط به خرید،
+        پرداخت یا دریافت رنک است،
+        با پشتیبانی تماس بگیر:
+
+        <br><br>
+
+        📞 <b>09057866708</b>
+        `;
+    }
+
+
+    /* تشکر */
+
+    if(
+        t.includes("ممنون") ||
+        t.includes("مرسی") ||
+        t.includes("تشکر")
+    ){
+
+        return `
+        خواهش می‌کنم 😎❤️
+        <br><br>
+        هر وقت مشکلی داشتی
+        من در خدمتم.
+        `;
+    }
+
+
+    /* جواب ناشناخته */
+
+    return `
+    🤖 متوجه درخواستت نشدم.
+
+    <br><br>
+
+    لطفاً سؤال دیگری بپرس.
+
+    <br><br>
+
+    اگر جواب سؤالت را پیدا نکردی،
+    با پشتیبانی تماس بگیر:
+
+    <br><br>
+
+    📞 <b>09057866708</b>
+    `;
+}
+
+
+/* اجرای اولیه */
+
+updateShop();
+
+</script>
+
+</body>
+</html>

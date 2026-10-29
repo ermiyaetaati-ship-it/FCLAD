@@ -1,108 +1,1679 @@
+
 <!DOCTYPE html>
+
 <html lang="fa" dir="rtl">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WaterCraft | دستگاه انرژی آبی</title>
-<style>
-:root{--bg:#071018;--panel:#101f2b;--blue:#00bfff;--cyan:#00f0ff;--green:#00ff78;--text:#eafaff}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at 50% 0%,#12344a 0,#071018 55%,#03070b 100%);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh}
-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px clamp(16px,4vw,48px);border-bottom:1px solid #1d5268;background:#061019d9;position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}
-.logo{font-weight:900;font-size:1.35rem;letter-spacing:.5px}.logo span{color:var(--cyan)}.pill{border:1px solid #17627b;border-radius:999px;padding:8px 12px;color:#9beeff;font-size:.85rem}
-main{max-width:1200px;margin:auto;padding:28px 18px 50px}
-.hero{text-align:center;margin:18px auto 28px}.hero h1{font-size:clamp(1.8rem,4vw,3rem);margin:0 0 10px}.hero h1 span{color:var(--cyan);text-shadow:0 0 22px #00bfff88}.hero p{color:#a9c5d3;line-height:1.9;margin:0}
-.layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(260px,.8fr);gap:18px}
-.panel{background:linear-gradient(145deg,#102534ee,#09141eee);border:1px solid #1c5066;border-radius:22px;box-shadow:0 18px 50px #0007,inset 0 1px #ffffff0a;overflow:hidden}
-.panel-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid #1a4052;font-weight:800}
-.scene{position:relative;min-height:450px;overflow:hidden;background:linear-gradient(#0b2030 0%,#0b1721 65%,#111f26 65%,#0a1218 100%)}
-.scene:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#1e536622 1px,transparent 1px),linear-gradient(90deg,#1e536622 1px,transparent 1px);background-size:32px 32px;transform:perspective(420px) rotateX(48deg) scale(1.4);transform-origin:bottom;opacity:.6}
-.pixel-sun{position:absolute;top:35px;left:40px;width:54px;height:54px;background:#00cfff22;border:4px solid #00cfff55;box-shadow:0 0 40px #00bfff33}
-.water-source{position:absolute;top:45px;left:8%;width:115px;height:70px;border:5px solid #1688b7;border-bottom:0;background:repeating-linear-gradient(0deg,#087bb9 0 9px,#13cfff 9px 14px);box-shadow:0 0 22px #00bfff55;clip-path:polygon(0 0,100% 0,100% 70%,70% 70%,70% 100%,0 100%)}
-.waterfall{position:absolute;top:110px;left:calc(8% + 67px);width:32px;height:178px;background:repeating-linear-gradient(0deg,#72f5ff 0 8px,#05aaff 8px 15px,#0874c9 15px 22px);filter:drop-shadow(0 0 8px #00cfff);animation:water .45s linear infinite;opacity:.95}
-@keyframes water{to{background-position:0 22px}}
-.splash{position:absolute;top:275px;left:calc(8% + 30px);width:115px;height:24px;border-radius:50%;border:5px solid #16dfff;box-shadow:0 0 20px #00bfff;animation:splash 1.4s ease-in-out infinite}
-@keyframes splash{50%{transform:scaleX(1.2);opacity:.5}}
-.gear-wrap{position:absolute;left:calc(8% + 2px);top:235px;width:190px;height:190px;display:grid;place-items:center}
-.gear{width:165px;height:165px;position:relative;animation:spin 5s linear infinite;filter:drop-shadow(0 0 14px #00aaff88)}
-.gear.paused{animation-play-state:paused}
-@keyframes spin{to{transform:rotate(360deg)}}
-.tooth{position:absolute;left:64px;top:-7px;width:37px;height:179px;background:repeating-linear-gradient(0deg,#12c9ff 0 18px,#086ba5 18px 28px);clip-path:polygon(20% 0,80% 0,100% 12%,100% 88%,80% 100%,20% 100%,0 88%,0 12%)}
-.tooth:nth-child(2){transform:rotate(45deg)}.tooth:nth-child(3){transform:rotate(90deg)}.tooth:nth-child(4){transform:rotate(135deg)}
-.gear-center{position:absolute;inset:36px;border-radius:50%;border:10px solid #45e8ff;background:repeating-conic-gradient(#07577f 0 15deg,#0b9ed0 15deg 30deg);box-shadow:inset 0 0 0 7px #06344e,0 0 18px #00bfff}
-.gear-hole{position:absolute;inset:61px;border-radius:50%;background:#071521;border:6px solid #65f4ff;box-shadow:0 0 15px #00bfff}
-.pipe{position:absolute;left:calc(8% + 160px);top:325px;width:250px;height:28px;border:7px solid #00bfff;border-left:0;border-radius:0 16px 16px 0;box-shadow:0 0 16px #00bfff55}
-.pipe:after{content:"";position:absolute;inset:3px;background:repeating-linear-gradient(90deg,#b6faff 0 9px,#00aaff 9px 18px);animation:water .5s linear infinite}
-.bulb{position:absolute;right:12%;top:170px;width:100px;height:125px;display:grid;place-items:center;transition:filter .3s,opacity .3s}
-.bulb-glass{width:75px;height:75px;border-radius:50% 50% 44% 44%;background:#eaffff;border:5px solid #a5f8ff;box-shadow:0 0 36px 12px #fff7a0,0 0 75px 22px #ffd43b88;position:relative}
-.bulb-glass:after{content:"";position:absolute;bottom:-22px;left:20px;width:25px;height:27px;background:repeating-linear-gradient(0deg,#9ab7c4 0 4px,#344b5b 4px 7px);border-radius:2px}
-.bulb.off{filter:grayscale(1);opacity:.35}.bulb.off .bulb-glass{background:#354653;box-shadow:none;border-color:#526979}
-.bulb-label{position:absolute;top:305px;right:calc(12% - 5px);font-size:.9rem;color:#ffe991}
-.block{position:absolute;bottom:0;height:65px;width:100%;background:repeating-linear-gradient(90deg,#142b35 0 31px,#244b59 31px 34px),repeating-linear-gradient(0deg,transparent 0 29px,#0b1720 29px 32px);border-top:4px solid #2e6270}
-.hint{position:absolute;bottom:78px;right:18px;color:#9ab9c7;font-size:.8rem}
-.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);margin-left:7px}
-.control-body{padding:20px}
-.big-status{padding:15px;border-radius:14px;background:#06131d;border:1px solid #19485c;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between}
-.big-status strong{font-size:1.1rem}.state{color:var(--green);font-weight:900}
-.control-label{font-size:.9rem;color:#a5c5d3;margin:18px 0 10px}
-.buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-button{font:inherit;font-weight:900;border:0;border-radius:13px;padding:14px 10px;cursor:pointer;transition:transform .15s,box-shadow .15s}
-button:active{transform:scale(.97)}
-.on{color:#032316;background:linear-gradient(135deg,#00ff8a,#00c96c);box-shadow:0 0 22px #00ff7833}
-.off{color:#d9f4ff;background:#173142;border:1px solid #32657c}
-button.selected{outline:2px solid #eaffff;outline-offset:2px}
-.meter{height:12px;border-radius:99px;background:#061019;border:1px solid #20485a;overflow:hidden}
-.meter-fill{height:100%;width:78%;background:linear-gradient(90deg,#007bff,#00f0ff,#00ff82);box-shadow:0 0 15px #00cfff;transition:width .3s}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:17px}
-.stat{padding:14px;border:1px solid #1a4658;background:#0a1923;border-radius:14px}.stat small{display:block;color:#8eafbd;margin-bottom:8px}.stat strong{font-size:1.25rem;color:#c8f8ff}
-.note{margin-top:14px;color:#7fa1b0;font-size:.78rem;line-height:1.8}
-footer{text-align:center;color:#668695;font-size:.8rem;padding:24px 10px}
-@media(max-width:800px){.layout{grid-template-columns:1fr}.scene{min-height:410px}.gear-wrap{transform:scale(.8);transform-origin:left top;top:220px}.waterfall{height:160px}.pipe{width:150px}.bulb{right:8%;transform:scale(.8)}.bulb-label{right:7%}}
-@media(max-width:480px){header{padding:14px}.pill{font-size:.72rem}.scene{min-height:365px}.water-source{left:4%;transform:scale(.8);transform-origin:left top}.waterfall{left:calc(4% + 52px);height:125px}.splash{left:4%;top:225px}.gear-wrap{left:1%;top:205px;transform:scale(.66)}.pipe{left:110px;top:285px;width:120px}.bulb{right:2%;top:145px;transform:scale(.65);transform-origin:top right}.bulb-label{right:2%;top:255px}.hint{font-size:.7rem}}
-</style>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        MC FCLAD
+    </title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Tahoma,
+                Arial,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #003333,
+                    #001414 45%,
+                    #000000
+                );
+
+            color: white;
+
+            min-height: 100vh;
+
+        }
+
+
+        /* =====================
+           هدر
+        ====================== */
+
+        header {
+
+            padding: 35px 15px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #00ff66,
+                    #00ffff
+                );
+
+            color: #001010;
+
+            box-shadow:
+                0 0 35px
+                rgba(0,255,100,.7);
+
+        }
+
+
+        header h1 {
+
+            margin: 0;
+
+            font-size: 42px;
+
+            font-weight: 900;
+
+            text-shadow:
+                2px 2px white;
+
+        }
+
+
+        header p {
+
+            margin-top: 10px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* =====================
+           منو
+        ====================== */
+
+        .menu {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+
+            padding: 18px;
+
+            background:
+                rgba(0,0,0,.85);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            backdrop-filter:
+                blur(10px);
+
+        }
+
+
+        .menu button {
+
+            border: 2px solid
+                #00ff66;
+
+            border-radius: 14px;
+
+            padding:
+                13px 25px;
+
+            background:
+                #071010;
+
+            color:
+                #00ff66;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                .25s;
+
+        }
+
+
+        .menu button:hover {
+
+            background:
+                #00ff66;
+
+            color:
+                #001010;
+
+            transform:
+                translateY(-4px)
+                scale(1.05);
+
+            box-shadow:
+                0 0 25px
+                #00ff66;
+
+        }
+
+
+        /* =====================
+           معرفی
+        ====================== */
+
+        .container {
+
+            width: 94%;
+
+            max-width: 1200px;
+
+            margin:
+                45px auto;
+
+        }
+
+
+        .welcome {
+
+            text-align: center;
+
+            margin-bottom: 40px;
+
+        }
+
+
+        .welcome h2 {
+
+            color:
+                #00ff66;
+
+            font-size: 32px;
+
+            text-shadow:
+                0 0 15px
+                rgba(0,255,100,.6);
+
+        }
+
+
+        .welcome p {
+
+            color: #ddd;
+
+            font-size: 19px;
+
+            line-height: 2;
+
+        }
+
+
+        /* =====================
+           کارت ها
+        ====================== */
+
+        .cards {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(300px, 1fr)
+                );
+
+            gap: 30px;
+
+        }
+
+
+        .card {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(0,255,100,.1),
+                    rgba(0,0,0,.9)
+                );
+
+            border:
+                2px solid
+                #00ff66;
+
+            border-radius:
+                22px;
+
+            padding: 20px;
+
+            text-align: center;
+
+            box-shadow:
+                0 0 15px
+                rgba(0,255,100,.15);
+
+            transition:
+                .35s;
+
+        }
+
+
+        .card:hover {
+
+            transform:
+                translateY(-10px);
+
+            border-color:
+                #00ffff;
+
+            box-shadow:
+                0 0 35px
+                rgba(0,255,100,.5);
+
+        }
+
+
+        .card img {
+
+            width: 100%;
+
+            height: 300px;
+
+            object-fit: cover;
+
+            border-radius:
+                16px;
+
+            border:
+                2px solid
+                rgba(255,255,255,.2);
+
+            transition:
+                .35s;
+
+        }
+
+
+        .card:hover img {
+
+            transform:
+                scale(1.03);
+
+        }
+
+
+        .card h2 {
+
+            color:
+                #00ff66;
+
+            font-size:
+                30px;
+
+            margin:
+                20px 0 10px;
+
+        }
+
+
+        .card p {
+
+            color:
+                #ddd;
+
+            font-size:
+                17px;
+
+            line-height:
+                1.9;
+
+        }
+
+
+        /* =====================
+           دکمه کارت
+        ====================== */
+
+        .card-button {
+
+            display:
+                inline-block;
+
+            margin-top:
+                15px;
+
+            padding:
+                12px 30px;
+
+            border-radius:
+                12px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #00ff66,
+                    #00ffff
+                );
+
+            color:
+                #001010;
+
+            text-decoration:
+                none;
+
+            font-size:
+                17px;
+
+            font-weight:
+                bold;
+
+            transition:
+                .25s;
+
+        }
+
+
+        .card-button:hover {
+
+            transform:
+                scale(1.07);
+
+            box-shadow:
+                0 0 20px
+                #00ffff;
+
+        }
+
+
+        /* =====================
+           کانال
+        ====================== */
+
+        .channel {
+
+            margin-top:
+                40px;
+
+            padding:
+                30px 20px;
+
+            text-align:
+                center;
+
+            background:
+                rgba(0,0,0,.75);
+
+            border:
+                2px solid
+                #00ff66;
+
+            border-radius:
+                20px;
+
+            box-shadow:
+                0 0 25px
+                rgba(0,255,100,.2);
+
+        }
+
+
+        .channel h2 {
+
+            color:
+                #00ff66;
+
+        }
+
+
+        .channel a {
+
+            display:
+                inline-block;
+
+            margin-top:
+                10px;
+
+            color:
+                #00ffff;
+
+            font-size:
+                20px;
+
+            font-weight:
+                bold;
+
+            text-decoration:
+                none;
+
+        }
+
+
+        .channel a:hover {
+
+            color:
+                #00ff66;
+
+        }
+
+
+        /* =====================
+           فوتر
+        ====================== */
+
+        footer {
+
+            margin-top:
+                50px;
+
+            padding:
+                25px;
+
+            text-align:
+                center;
+
+            background:
+                #000;
+
+            color:
+                #777;
+
+            border-top:
+                1px solid
+                #00ff66;
+
+        }
+
+
+        footer span {
+
+            color:
+                #00ff66;
+
+            font-weight:
+                bold;
+
+        }
+
+
+        /* =====================
+           موبایل
+        ====================== */
+
+        @media (max-width: 600px) {
+
+            header h1 {
+
+                font-size:
+                    30px;
+
+            }
+
+
+            .menu {
+
+                flex-direction:
+                    column;
+
+            }
+
+
+            .menu button {
+
+                width:
+                    100%;
+
+            }
+
+
+            .cards {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .card img {
+
+                height:
+                    260px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
-<body>
-<header><div class="logo">💧 Water<span>Craft</span></div><div class="pill">دستگاه انرژی ماینکرافتی</div></header>
-<main>
-<section class="hero"><h1>کارخانه‌ی <span>انرژی آب</span></h1><p>آب جاری، چرخ‌دنده‌ی ماینکرافتی و یک چراغ قابل‌کنترل؛ دستگاهت را روشن کن!</p></section>
-<div class="layout">
-<section class="panel">
-<div class="panel-head"><span>⚙️ دستگاه آب و چرخ‌دنده</span><span><i class="status-dot" id="sceneDot"></i><span id="sceneState">فعال</span></span></div>
-<div class="scene">
-<div class="pixel-sun"></div><div class="water-source"></div><div class="waterfall" id="waterfall"></div><div class="splash" id="splash"></div>
-<div class="gear-wrap"><div class="gear" id="gear"><div class="tooth"></div><div class="tooth"></div><div class="tooth"></div><div class="tooth"></div><div class="gear-center"></div><div class="gear-hole"></div></div></div>
-<div class="pipe" id="pipe"></div>
-<div class="bulb" id="bulb"><div class="bulb-glass"></div></div><div class="bulb-label">چراغ انرژی</div>
-<div class="hint">آب ↓ چرخ‌دنده ⚙️ → انرژی → چراغ 💡</div><div class="block"></div>
-</div></section>
-<aside class="panel"><div class="panel-head"><span>🎛️ پنل کنترل</span><span class="pill">CONTROL</span></div>
-<div class="control-body">
-<div class="big-status"><strong>وضعیت دستگاه</strong><span class="state" id="status">● روشن</span></div>
-<div class="control-label">کلید روشن و خاموش</div>
-<div class="buttons"><button class="on selected" id="onBtn">⏻ روشن (ON)</button><button class="off" id="offBtn">خاموش (OFF)</button></div>
-<div class="control-label">قدرت جریان آب</div><div class="meter"><div class="meter-fill" id="powerFill"></div></div>
-<div class="stats"><div class="stat"><small>سرعت چرخ‌دنده</small><strong id="speed">78 RPM</strong></div><div class="stat"><small>انرژی نمایشی</small><strong id="energy">78%</strong></div><div class="stat" style="grid-column:1/-1"><small>🔋 ولتاژ خروجی</small><strong id="voltage">12 V</strong></div><div class="stat" style="grid-column:1/-1"><small>⚡ برق تولیدشده</small><strong id="electricity">0.000 kWh</strong></div></div>
-<p class="note">این یک شبیه‌سازی تعاملی داخل مرورگر است؛ دکمه‌ها انیمیشن چرخ، جریان آب و چراغ را کنترل می‌کنند. برای کنترل سخت‌افزار واقعی به مدار و میکروکنترلر نیاز است.</p>
-</div></aside>
-</div>
-</main><footer>WaterCraft • ساخته‌شده با HTML, CSS و JavaScript</footer>
-<script>
-const gear=document.getElementById('gear'), bulb=document.getElementById('bulb'), waterfall=document.getElementById('waterfall'), splash=document.getElementById('splash'), pipe=document.getElementById('pipe');
-const statusText=document.getElementById('status'), sceneState=document.getElementById('sceneState'), sceneDot=document.getElementById('sceneDot'), powerFill=document.getElementById('powerFill'), speed=document.getElementById('speed'), energy=document.getElementById('energy'), electricity=document.getElementById('electricity'), voltage=document.getElementById('voltage'), onBtn=document.getElementById('onBtn'), offBtn=document.getElementById('offBtn');
-let generatedWh = Number(localStorage.getItem('watercraft_generated_wh') || 0);
-function updateElectricity(){ electricity.textContent=(generatedWh/1000).toFixed(3)+' kWh'; localStorage.setItem('watercraft_generated_wh', String(generatedWh)); }
-updateElectricity();
-setInterval(()=>{ if(!gear.classList.contains('paused')){ generatedWh += 0.078/3600*1000; updateElectricity(); } },1000);
-function setPower(isOn){
-  gear.classList.toggle('paused',!isOn); bulb.classList.toggle('off',!isOn);
-  waterfall.style.animationPlayState=isOn?'running':'paused'; splash.style.animationPlayState=isOn?'running':'paused'; pipe.style.opacity=isOn?'1':'.25';
-  statusText.textContent=isOn?'● روشن':'● خاموش'; statusText.style.color=isOn?'#00ff78':'#8aa6b5';
-  sceneState.textContent=isOn?'فعال':'خاموش'; sceneDot.style.background=isOn?'#00ff78':'#718795'; sceneDot.style.boxShadow=isOn?'0 0 10px #00ff78':'none';
-  powerFill.style.width=isOn?'78%':'0%'; speed.textContent=isOn?'78 RPM':'0 RPM'; energy.textContent=isOn?'78%':'0%'; if(voltage) voltage.textContent=isOn?'12 V':'0 V';
-  onBtn.classList.toggle('selected',isOn); offBtn.classList.toggle('selected',!isOn);
+
+<!-- =========================
+     MC FCLAD SUPPORT CHAT
+========================= -->
+
+<style>
+
+#mcSupportButton{
+    position:fixed;
+    left:22px;
+    bottom:22px;
+
+    width:65px;
+    height:65px;
+
+    border-radius:50%;
+    border:3px solid #00ffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00ff66,
+            #00ffff
+        );
+
+    color:#001010;
+
+    font-size:30px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    z-index:99999;
+
+    box-shadow:
+        0 0 15px #00ff66,
+        0 0 35px rgba(0,255,255,.5);
+
+    transition:.25s;
+
+    animation:mcSupportPulse 2s infinite;
 }
-onBtn.addEventListener('click',()=>setPower(true)); offBtn.addEventListener('click',()=>setPower(false));
-setPower(true);
+
+#mcSupportButton:hover{
+    transform:scale(1.12);
+
+    box-shadow:
+        0 0 25px #00ff66,
+        0 0 55px #00ffff;
+}
+
+@keyframes mcSupportPulse{
+
+    0%,100%{
+        box-shadow:
+            0 0 15px #00ff66,
+            0 0 35px rgba(0,255,255,.5);
+    }
+
+    50%{
+        box-shadow:
+            0 0 30px #00ff66,
+            0 0 60px #00ffff;
+    }
+
+}
+
+
+/* پنجره چت */
+
+#mcSupportChat{
+
+    position:fixed;
+
+    left:22px;
+    bottom:100px;
+
+    width:360px;
+    max-width:
+        calc(100vw - 30px);
+
+    height:520px;
+
+    background:#071010;
+
+    border:
+        2px solid #00ff66;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    z-index:99998;
+
+    box-shadow:
+        0 0 35px
+        rgba(0,255,102,.35),
+
+        0 20px 70px
+        rgba(0,0,0,.7);
+
+    display:none;
+
+    flex-direction:column;
+
+    animation:
+        mcChatOpen .25s ease;
+}
+
+@keyframes mcChatOpen{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(20px)
+            scale(.95);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* هدر چت */
+
+.mc-chat-header{
+
+    padding:16px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00ff66,
+            #00ffff
+        );
+
+    color:#001010;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+}
+
+.mc-chat-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-weight:bold;
+}
+
+.mc-chat-avatar{
+
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    background:#001010;
+
+    color:#00ff66;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:21px;
+
+}
+
+.mc-chat-close{
+
+    border:0;
+
+    background:rgba(0,0,0,.2);
+
+    color:#001010;
+
+    width:35px;
+    height:35px;
+
+    border-radius:50%;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+}
+
+
+/* پیام ها */
+
+#mcMessages{
+
+    flex:1;
+
+    overflow-y:auto;
+
+    padding:15px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+
+/* حباب */
+
+.mc-message{
+
+    max-width:82%;
+
+    padding:11px 13px;
+
+    border-radius:15px;
+
+    font-size:13px;
+
+    line-height:1.8;
+
+}
+
+.mc-bot{
+
+    align-self:flex-start;
+
+    background:#142020;
+
+    border:
+        1px solid #294040;
+
+    color:#eee;
+
+}
+
+.mc-user{
+
+    align-self:flex-end;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00ff66,
+            #00ffff
+        );
+
+    color:#001010;
+
+    font-weight:bold;
+
+}
+
+
+/* سوال های آماده */
+
+.mc-quick{
+
+    display:flex;
+
+    gap:7px;
+
+    overflow-x:auto;
+
+    padding:10px;
+
+    border-top:
+        1px solid #183030;
+}
+
+.mc-quick button{
+
+    white-space:nowrap;
+
+    padding:8px 11px;
+
+    border-radius:20px;
+
+    border:
+        1px solid #00ff66;
+
+    background:#071010;
+
+    color:#00ff66;
+
+    cursor:pointer;
+
+    font-size:11px;
+
+}
+
+
+/* ورودی */
+
+.mc-chat-input{
+
+    display:flex;
+
+    gap:7px;
+
+    padding:10px;
+
+    border-top:
+        1px solid #183030;
+
+}
+
+#mcInput{
+
+    flex:1;
+
+    min-width:0;
+
+    background:#020707;
+
+    color:white;
+
+    border:
+        1px solid #294040;
+
+    border-radius:12px;
+
+    padding:12px;
+
+    outline:none;
+
+}
+
+#mcInput:focus{
+
+    border-color:#00ff66;
+
+}
+
+.mc-send{
+
+    border:0;
+
+    border-radius:12px;
+
+    padding:0 15px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00ff66,
+            #00ffff
+        );
+
+    color:#001010;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+/* موبایل */
+
+@media(max-width:600px){
+
+    #mcSupportButton{
+
+        left:15px;
+        bottom:15px;
+
+        width:58px;
+        height:58px;
+
+    }
+
+    #mcSupportChat{
+
+        left:10px;
+        bottom:85px;
+
+        width:
+            calc(100vw - 20px);
+
+        height:
+            70vh;
+
+    }
+
+}
+
+</style>
+
+
+<!-- دکمه پشتیبانی -->
+
+<button
+    id="mcSupportButton"
+    onclick="mcToggleSupport()"
+    aria-label="پشتیبانی MC FCLAD">
+
+    🎧
+
+</button>
+
+
+<!-- پنجره پشتیبانی -->
+
+<div id="mcSupportChat">
+
+
+    <!-- هدر -->
+
+    <div class="mc-chat-header">
+
+        <div class="mc-chat-title">
+
+            <div class="mc-chat-avatar">
+                🎧
+            </div>
+
+            <div>
+
+                <div>
+                    پشتیبانی MC FCLAD
+                </div>
+
+                <small>
+                    🟢 آنلاین
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="mc-chat-close"
+            onclick="mcToggleSupport()">
+
+            ✕
+
+        </button>
+
+    </div>
+
+
+    <!-- پیام ها -->
+
+    <div id="mcMessages">
+
+        <div class="mc-message mc-bot">
+
+            <b>پشتیبانی MC FCLAD</b>
+            <br><br>
+
+            سلام 👋🔥
+
+            <br>
+
+            به پشتیبانی رنک‌های
+            <b>MC FCLAD</b>
+            خوش آمدی!
+
+            <br><br>
+
+            سوالت درباره رنک‌ها،
+            خرید یا سبد خرید رو بپرس. 🎮
+
+        </div>
+
+    </div>
+
+
+    <!-- سوال های آماده -->
+
+    <div class="mc-quick">
+
+        <button
+            onclick="mcQuick('قیمت رنک ها چقدر است؟')">
+
+            💰 قیمت رنک
+
+        </button>
+
+        <button
+            onclick="mcQuick('چطور رنک بخرم؟')">
+
+            🛒 خرید رنک
+
+        </button>
+
+        <button
+            onclick="mcQuick('رنک VIP چیست؟')">
+
+            ⭐ VIP
+
+        </button>
+
+        <button
+            onclick="mcQuick('سبد خرید کجاست؟')">
+
+            🛍️ سبد خرید
+
+        </button>
+
+        <button
+            onclick="mcQuick('مشکل دارم')">
+
+            ⚠️ مشکل
+
+        </button>
+
+    </div>
+
+
+    <!-- ورودی -->
+
+    <div class="mc-chat-input">
+
+        <input
+            id="mcInput"
+            type="text"
+            placeholder="پیامت رو بنویس..."
+            autocomplete="off"
+            onkeydown="mcEnter(event)">
+
+        <button
+            class="mc-send"
+            onclick="mcSend()">
+
+            ارسال
+
+        </button>
+
+    </div>
+
+
+</div>
+
+
+
+<body>
+
+
+    <!-- هدر -->
+
+    <header>
+
+        <h1>
+            🔥 MC FCLAD 🔥
+        </h1>
+
+        <p>
+            دنیای گیمینگ و کامپیوتر
+        </p>
+
+    </header>
+
+
+
+    <!-- منو -->
+
+    <div class="menu">
+
+
+        <button
+            onclick="window.open('d:/pc/MC1.html')"
+            >
+
+            🛒 شاپ
+
+        </button>
+
+
+        <button
+            onclick=
+                "window.open('d:/pc/sabadkhredFCLADMC.html')"
+            >
+
+            🛍️ سبد خرید
+
+        </button>
+
+
+        <button
+            onclick="window.open('d:/pc/pshtebaneFCLADMC.html') ">
+               
+           
+
+            🎧 پشتیبانی
+
+        </button>
+
+ <button
+        class="support"
+        onclick="window.location.href='d:/pc/pashte chat.html'">
+
+        🎧 چت پشتیبانی
+
+    </button>
+
+    </div>
+
+
+
+    <!-- محتوای اصلی -->
+
+    <main class="container">
+
+
+        <section class="welcome">
+
+            <h2>
+                🎮 به MC FCLAD خوش آمدید!
+            </h2>
+
+            <p>
+
+                اینجا دنیای گیمینگ و کامپیوتره!
+                <br>
+
+                می‌تونی رنک‌های مختلف،
+                محصولات گیمینگ و امکانات ویژه
+                رو از شاپ تهیه کنی.
+
+                🔥🎮💻
+
+            </p>
+
+        </section>
+
+
+
+        <!-- کارت ها -->
+
+        <section class="cards">
+
+
+            <!-- Minecraft -->
+
+            <div class="card">
+
+
+                <img
+                    src="C:\Users\IT CITY\Pictures\bc647357-1af9-460a-a22d-63c6369bf7a0.png"
+                    alt="Minecraft">
+
+
+                <h2>
+                    ⛏️ FC
+                </h2>
+
+
+                <p>
+
+                    وارد دنیای Minecraft شو
+                    و ماجراجویی خودت رو شروع کن!
+
+                    🎮🔥
+
+                </p>
+
+
+                <a
+                    class="card-button"
+                    href="d:/pc/MC1.html">
+
+                    ورود به شاپ
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- FCLAD -->
+
+            <div class="card">
+
+
+                <img
+                    src="c:\Users\IT CITY\Pictures\1e8c888c-1f5c-459d-bae2-dbbd38c4a6df.png"
+                    alt="FCLAD">
+
+
+                <h2>
+                    ⚡ FCLAD
+                </h2>
+
+
+                <p>
+
+                    به دنیای FCLAD خوش آمدید!
+
+                    اینجا می‌توانید
+                    رنک خود را خریداری کنید
+                    و از امکانات ویژه استفاده کنید.
+
+                    😎🔥
+
+                </p>
+
+
+                <a
+                    class="card-button"
+                    href="d:/pc/MC1.html">
+
+                    🛒 مشاهده محصولات
+
+                </a>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- کانال -->
+
+        <section class="channel">
+
+
+            <h2>
+                📢 کانال ما
+            </h2>
+
+
+            <p>
+                برای اخبار و اطلاعیه‌ها
+                عضو کانال های ما شوید.
+            </p>
+
+
+            <a
+                href="https://t.me/ermiyaetaati"
+                target="_blank">
+
+                📱 t.me/ermiyaetaati
+
+            </a>
+
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- فوتر -->
+
+    <footer>
+
+        ساخته شده برای
+
+        <span>
+            MC FCLAD
+        </span>
+
+        ❤️
+
+    </footer>
+
+<!-- =========================
+     MC FCLAD CHAT
+========================= -->
+
+<button id="fcladChatBtn" onclick="fcladOpenChat()">🎧</button>
+
+<div id="fcladChat">
+
+    <div class="fcladHeader">
+        <div>
+            <b>🎧 پشتیبانی MC FCLAD</b>
+            <span>🟢 آنلاین</span>
+        </div>
+
+        <button onclick="fcladCloseChat()">×</button>
+    </div>
+
+    <div id="fcladMessages" class="fcladMessages">
+
+        <div class="fcladBot">
+            <b>پشتیبانی MC FCLAD 👋</b>
+            <br><br>
+            سلام! سوالت درباره رنک، خرید یا پرداخت رو بپرس 🎮
+        </div>
+
+    </div>
+
+    <div class="fcladInput">
+
+        <input
+            id="fcladInput"
+            placeholder="پیامت رو بنویس..."
+            onkeydown="if(event.key==='Enter')fcladSend()">
+
+        <button onclick="fcladSend()">ارسال</button>
+
+    </div>
+
+</div>
+
+<style>
+
+#fcladChatBtn{
+    position:fixed;
+    left:22px;
+    bottom:22px;
+    width:64px;
+    height:64px;
+    border-radius:50%;
+    border:3px solid #00ffff;
+    background:linear-gradient(135deg,#00ff66,#00ffff);
+    font-size:30px;
+    cursor:pointer;
+    z-index:999999;
+    box-shadow:0 0 20px #00ff66,0 0 45px #00ffff;
+    animation:fcladPulse 2s infinite;
+}
+
+#fcladChatBtn:hover{
+    transform:scale(1.1);
+}
+
+@keyframes fcladPulse{
+    0%,100%{
+        box-shadow:0 0 15px #00ff66,0 0 35px #00ffff;
+    }
+    50%{
+        box-shadow:0 0 30px #00ff66,0 0 60px #00ffff;
+    }
+}
+
+#fcladChat{
+    position:fixed;
+    left:22px;
+    bottom:100px;
+    width:360px;
+    height:520px;
+    max-width:calc(100vw - 25px);
+    background:#071010;
+    border:2px solid #00ff66;
+    border-radius:22px;
+    overflow:hidden;
+    z-index:999998;
+    display:none;
+    flex-direction:column;
+    box-shadow:0 20px 70px #000;
+}
+
+.fcladHeader{
+    padding:15px;
+    background:linear-gradient(90deg,#00ff66,#00ffff);
+    color:#001010;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.fcladHeader span{
+    display:block;
+    font-size:11px;
+    margin-top:4px;
+}
+
+.fcladHeader button{
+    border:0;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:#0003;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.fcladMessages{
+    flex:1;
+    overflow-y:auto;
+    padding:15px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.fcladBot,
+.fcladUser{
+    max-width:85%;
+    padding:12px;
+    border-radius:15px;
+    line-height:1.8;
+    font-size:13px;
+}
+
+.fcladBot{
+    align-self:flex-start;
+    background:#142020;
+    color:white;
+    border:1px solid #294040;
+}
+
+.fcladUser{
+    align-self:flex-end;
+    background:linear-gradient(90deg,#00ff66,#00ffff);
+    color:#001010;
+    font-weight:bold;
+}
+
+.fcladInput{
+    display:flex;
+    gap:7px;
+    padding:10px;
+    border-top:1px solid #183030;
+}
+
+.fcladInput input{
+    flex:1;
+    min-width:0;
+    padding:12px;
+    background:#020707;
+    color:white;
+    border:1px solid #294040;
+    border-radius:12px;
+    outline:none;
+}
+
+.fcladInput input:focus{
+    border-color:#00ff66;
+}
+
+.fcladInput button{
+    border:0;
+    border-radius:12px;
+    padding:0 15px;
+    background:linear-gradient(90deg,#00ff66,#00ffff);
+    color:#001010;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+@media(max-width:600px){
+
+    #fcladChatBtn{
+        left:15px;
+        bottom:15px;
+        width:58px;
+        height:58px;
+    }
+
+    #fcladChat{
+        left:10px;
+        bottom:82px;
+        width:calc(100vw - 20px);
+        height:70vh;
+    }
+}
+
+</style>
+
+<script>
+
+function fcladOpenChat(){
+
+    document.getElementById("fcladChat").style.display="flex";
+
+    setTimeout(function(){
+        document.getElementById("fcladInput").focus();
+    },100);
+}
+
+function fcladCloseChat(){
+
+    document.getElementById("fcladChat").style.display="none";
+}
+
+function fcladSend(){
+
+    const input=document.getElementById("fcladInput");
+    const text=input.value.trim();
+
+    if(!text)return;
+
+    fcladAddMessage(text,"user");
+
+    input.value="";
+
+    setTimeout(function(){
+
+        fcladAddMessage(
+            fcladAnswer(text),
+            "bot"
+        );
+
+    },500);
+}
+
+function fcladAddMessage(text,type){
+
+    const box=document.getElementById("fcladMessages");
+
+    const msg=document.createElement("div");
+
+    msg.className=
+        type==="user"
+        ? "fcladUser"
+        : "fcladBot";
+
+    msg.innerHTML=text;
+
+    box.appendChild(msg);
+
+    box.scrollTop=box.scrollHeight;
+}
+
+function fcladAnswer(text){
+
+    const t=text
+        .toLowerCase()
+        .replace(/ي/g,"ی")
+        .replace(/ك/g,"ک");
+
+    if(t.includes("سلام")){
+        return "سلام 👋🔥 به پشتیبانی MC FCLAD خوش اومدی! چه کمکی از دستم برمیاد؟";
+    }
+
+    if(t.includes("vip")){
+        return "⭐ قیمت رنک VIP: <b>۴۹٬۰۰۰ تومان در ماه</b>";
+    }
+
+    if(t.includes("mvp")){
+        return "⭐ قیمت رنک MVP: <b>۹۹٬۰۰۰ تومان در ماه</b>";
+    }
+
+    if(t.includes("football player 2")){
+        return "⚽ FOOTBALL PLAYER 2: <b>۱۹۹٬۰۰۰ تومان در ماه</b>";
+    }
+
+    if(t.includes("football player")){
+        return "⚽ FOOTBALL PLAYER: <b>۱۴۹٬۰۰۰ تومان در ماه</b>";
+    }
+
+    if(t.includes("god")){
+        return "👑 GOD: <b>۲۴۹٬۰۰۰ تومان در ماه</b>";
+    }
+
+    if(t.includes("elite")){
+        return "💎 ELITE: <b>۲۹۹٬۰۰۰ تومان در ماه</b>";
+    }
+
+    if(t.includes("supreme")){
+        return "🔥 SUPREME: <b>۳۴۹٬۰۰۰ تومان در ماه</b>";
+    }
+
+    if(t.includes("pro")){
+        return "🚀 PRO: <b>۳۹۹٬۰۰۰ تومان در ماه</b>";
+    }
+
+    if(t.includes("قیمت") || t.includes("رنک")){
+
+        return `
+        🎮 رنک‌های MC FCLAD:<br><br>
+        ⭐ VIP — ۴۹٬۰۰۰ تومان<br>
+        ⭐ MVP — ۹۹٬۰۰۰ تومان<br>
+        ⚽ FOOTBALL PLAYER — ۱۴۹٬۰۰۰ تومان<br>
+        ⚽ FOOTBALL PLAYER 2 — ۱۹۹٬۰۰۰ تومان<br>
+        👑 GOD — ۲۴۹٬۰۰۰ تومان<br>
+        💎 ELITE — ۲۹۹٬۰۰۰ تومان<br>
+        🔥 SUPREME — ۳۴۹٬۰۰۰ تومان<br>
+        🚀 PRO — ۳۹۹٬۰۰۰ تومان
+        `;
+    }
+
+    if(t.includes("خرید")){
+        return "🛒 برای خرید، رنک موردنظر را در شاپ انتخاب کن و روی «افزودن به سبد خرید» بزن.";
+    }
+
+    if(t.includes("پرداخت") || t.includes("پول")){
+        return "💳 اگر پرداخت کردی ولی رنک دریافت نکردی، رسید پرداختت را نگه دار و با پشتیبانی تماس بگیر.";
+    }
+
+    if(t.includes("مشکل") || t.includes("خطا")){
+        return "⚠️ لطفاً مشکل را دقیق توضیح بده. اگر نتونستم راهنمایی کنم با پشتیبانی تماس بگیر: <b>09057866708</b>";
+    }
+
+    return `
+    🤖 جواب این سؤال را ندارم.<br><br>
+    لطفاً با پشتیبانی تماس بگیر:<br><br>
+    📞 <b>09057866708</b>
+    `;
+}
+
 </script>
 </body>
+
 </html>
+
